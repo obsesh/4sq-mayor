@@ -83,7 +83,7 @@ def start(client)
 end
 
 # Begin Main Routine
-client = Foursquare2::Client.new(:client_id => '0YBX2W10303UIXVVZYS5IKOHQ50KRWA2HW4L1ENSWPPS0URX',
-																 :client_secret => 'ZHRRIAY1IVH1Q5VUUPNMJYNP3YRGV4FKPB4I1KMQFSWCMRV4')
-#start client
+client = Foursquare2::Client.new(:client_id => $client_id, :client_secret => $client_secret)
+
+# Legggo
 start client
