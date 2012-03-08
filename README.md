@@ -8,5 +8,7 @@ Mwahahahaha. Our sinister plan will succedd.
 
 ## Instructions
 How to run:
-`bundle install
-ruby mayor.rb`
+```
+bundle install
+ruby mayor.rb
+```
