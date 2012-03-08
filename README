@@ -3,7 +3,7 @@ Use this script to become the mayor of virtually any foursquare venue. By genera
 Mwahahahaha. Our sinister plan will succedd.
 
 How to run:
-'''
+<pre>
 bundle install
 ruby mayor.rb
-'''
+</pre>
