@@ -9,6 +9,6 @@ Mwahahahaha. Our sinister plan will succeed.
 ## Instructions
 How to run:
 ```
-bundle install
+bundle install && 
 ruby mayor.rb
 ```
