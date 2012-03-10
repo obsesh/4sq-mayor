@@ -4,8 +4,7 @@ require 'geokit'
 require 'oauth2'
 require 'cronedit'
 
-$client_id = '0YBX2W10303UIXVVZYS5IKOHQ50KRWA2HW4L1ENSWPPS0URX'
-$client_secret = 'ZHRRIAY1IVH1Q5VUUPNMJYNP3YRGV4FKPB4I1KMQFSWCMRV4'
+require 'config'
 
 # Search for a venue using a location and a name
 def venue_search(client)
@@ -18,18 +17,19 @@ def venue_search(client)
 	geo = Geokit::Geocoders::YahooGeocoder.geocode venue_location
 	venues = client.search_venues(:ll => geo.ll, :query => venue_query, :limit => 10)
 	venues.groups[0].items.each_with_index do |venue, index|
-		puts "(#{index}) #{venue.name} [@#{venue.id} #{venue.location.address}, #{venue.location.city}, #{venue.location.state}]."
+		puts "(#{index + 1}) #{venue.name} [:#{venue.id} @ #{venue.location.address}, #{venue.location.city}, #{venue.location.state}]."
 	end
-	puts "(t) My venue isn't here! Try again..."
+	puts "(0) My venue isn't here! Try again..."
 
 	chosen_venue = gets
 	case chosen_venue.strip.to_i
-		when 0..9
+		when 1..10
 			venue_id = chosen_venue.strip
-		when "t"
+		when 0
 			venue_id = venue_search client
 		else
 			puts "Invalid choice.: '#{chosen_venue.strip}'"
+			venue_id = venue_search client
 	end
 
 	return venue_id
@@ -78,12 +78,12 @@ def start(client)
 	cronme_betch venue_id, token
 
 	puts "***********************************************************"
-	puts "All done! Soon you will become the mayor of {}"
+	puts "All done! Soon you will become the mayor of venue ##{venue_id}"
 	puts "***********************************************************"
 end
 
 # Begin Main Routine
 client = Foursquare2::Client.new(:client_id => $client_id, :client_secret => $client_secret)
 
-# Legggo
+# Legggggo....
 start client
