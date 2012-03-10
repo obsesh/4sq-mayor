@@ -24,7 +24,7 @@ def venue_search(client)
 	chosen_venue = gets
 	case chosen_venue.strip.to_i
 		when 1..10
-			venue_id = chosen_venue.strip
+			venue_id = venues.groups[0].items[chosen_venue.strip.to_i - 1].id
 		when 0
 			venue_id = venue_search client
 		else
@@ -54,9 +54,9 @@ end
 
 # Create a CRON task
 def cronme_betch(venue_id, token)
-	cmd = "curl -X POST -d 'venueId=#{venue_id}&broadcast=public' https://api.foursquare.com/v2/checkins/add?oauth_token=#{token}"
+	cmd = "curl -X POST -d 'venueId=#{venue_id}&broadcast=private' https://api.foursquare.com/v2/checkins/add?oauth_token=#{token}"
 
-	CronEdit::Crontab.Add '4sq-mayor', {:day => 1, :minute => 5, :command => cmd}
+	CronEdit::Crontab.Add '4sq-mayor', {:hour => 16, :command => cmd}
 end
 
 # Fire up the selection menu
